@@ -1,9 +1,9 @@
 # ICC-2020-1
 
-##Nombre: 
+## Nombre:
 
 Arroyo Lozano Santiago
 
-##Número de cuenta: 
+## Número de cuenta:
 
 317150700
