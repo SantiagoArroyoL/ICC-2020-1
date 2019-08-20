@@ -11,7 +11,7 @@ public class Sintaxis {
 		a = 3; c = -7;
 
 		int prop = 0;
-		int ochoBits = 128;
+		byte ochoBits = 127;
 		int dieciseisBits = -32769;
 
 		double discriminante = b * b - 4 * a * c;
