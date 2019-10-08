@@ -11,7 +11,7 @@ public class RFC {
 		Scanner scanner = new Scanner(System.in);
 		String nombre = new String();
 		String año, mes, dia, apellidoM, apellidoP, inicial;
-	        String fecha = new String();
+	   String fecha = new String();
 		int x;
 
 		System.out.println("Introduce tu nombre completo:");
@@ -41,12 +41,11 @@ public class RFC {
 		//Día
 		x = 0;
 		dia = fecha.substring(x,x+2);
-
 		String RFC = apellidoP + apellidoM + inicial + año + mes + dia;
 		RFC = RFC.toUpperCase();
 		System.out.println("El RFC de " +  nombre + " es: " + RFC);
-	     
-		
+
+
 	}
 
 }
