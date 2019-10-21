@@ -1,8 +1,10 @@
-// package alglin;
+package alglin;
 
 /**
  * Representa una matriz de mxn con entradas en los reales.
  *
+ * @author Arroyo Lozano Santiago
+ * @version 18/10/2019 A
  */
 public class Matriz {
 
@@ -16,7 +18,9 @@ public class Matriz {
      * @param n el número de columnas
      */
     public Matriz(int m, int n) {
-      datos = new double[m][n];
+      this.datos = new double[m][n];
+      this.m = m;
+      this.n = n;
       for (int i = 0; i < m; i++) {
          for (int j = 0; j < n; j++) {
             datos[i][j] = 0;
@@ -53,14 +57,18 @@ public class Matriz {
      * @param otra la otra matriz con la cual se sumará esta
      * @return una matriz nueva que resulta de sumar esta con <code>otra</code>
      */
-    public Matriz sumar(Matriz otra) { 
-      Matriz sumada = new Matriz(m,n);
+    public Matriz sumar(Matriz otra) {
+      if (this.m == otra.m && this.n == otra.n) {
+         Matriz sumada = new Matriz(m,n);
          for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-               sumada.datos[i][j] = datos[i][j] + otra.datos[i][j];
+               sumada.datos[i][j] = this.datos[i][j] + otra.datos[i][j];
             }
          }
-      return sumada;
+         return sumada;
+      } else {
+         return null;
+      }
    }//Cierre del método
 
     /**
@@ -87,20 +95,18 @@ public class Matriz {
      */
     public Matriz eliminarFila(int k) {
       Matriz eliminada = new Matriz(m-1,n);
-      if (k > 0) {
-         int iX = 0;
          for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-               if (datos[i][j] != datos[k][j]) {
-                  eliminada.datos[iX][j] = datos[i][j];
-                  iX++;
+               if (i != k) {
+                  if (i > k) {
+                     eliminada.datos[i-1][j] = datos[i][j];
+                  } else {
+                     eliminada.datos[i][j] = datos[i][j];
+                  }
                }
             }
          }
-         return eliminada;
-      } else {
-         return eliminada;
-      }
+      return eliminada;
     }//Cierre del método
 
     /**
@@ -110,27 +116,54 @@ public class Matriz {
      * @return una matriz nueva que resulta de eliminar la k-ésima columna de esta matriz
      */
     public Matriz eliminarColumna(int k) {
-      int jY = 0;
       Matriz eliminada = new Matriz(m,n-1);
-      for (int i = 0; i < m; i++) {
-         for (int j = 0; j < n; j++) {
-           if (datos[i][j] != datos[i][k]) {
-               eliminada.datos[i][jY] = datos[i][j];
-               jY++;
-           }
+         for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+               if (j != k) {
+                  if (j > k) {
+                     eliminada.datos[i][j-1] = datos[i][j];
+                  } else {
+                     eliminada.datos[i][j] = datos[i][j];
+                  }
+               }
+            }
          }
-      }
       return eliminada;
    }//Cierre del método
 
-    /**
-     * Calcula el determinante de esta matriz.
-     *
-     * @return el determinante de esta matriz
-     */
-    public double determinante() {
-        return 0;
-    }
+   /**
+    * Calcula el determinante de esta matriz.
+    *
+    * @return el determinante de esta matriz
+    */
+	public double determinante() {
+      int signo;
+      double menor;
+      int comodin = 1;
+      double determinante = 0.0;
+      Matriz matrizCofactor;
+      if (m == n) {
+         if (m == 1) {
+            return this.datos[0][0];
+         }
+         for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+               signo = ((j+i) % 2 == 0) ? 1:-1;
+               if (i < 1) {
+                  if (m > 2) {
+                     menor = datos[i][j];
+                     matrizCofactor = eliminarFila(i).eliminarColumna(j);
+                     determinante += signo * menor * matrizCofactor.determinante();
+                  } else {
+                     comodin = (j == 1) ? -1:comodin;
+                     determinante += signo * datos[i][j]*datos[i+1][j+comodin];
+                  }
+               }
+            }
+         }
+      }
+      return determinante;
+   } // Cierre del método
 
     /**
      * Regresa los datos de esta matriz de tal forma que las columnas están separadas por un espacio
@@ -142,14 +175,18 @@ public class Matriz {
      * @return la representación en <code>String</code> de esta matriz
      */
     @Override
-    public String toString() {
+    public String toString(){
       String matrizCadenosa = "";
-      for (int i = 0; i < m; i++) {
-         for (int j = 0; j < n; j++) {
-            matrizCadenosa += "" + datos[i][j] + " ";
-            System.out.println(datos[i][j]);
+      for(int i = 0; i < m; i++) {
+         for(int j = 0; j < n; j++) {
+            matrizCadenosa += "" + datos[i][j];
+            if(j < n-1){
+               matrizCadenosa += " ";
+            }
          }
-         matrizCadenosa += "\n";
+         if(i < m-1){
+            matrizCadenosa += "\n";
+         }
       }
       return matrizCadenosa;
     }
@@ -164,29 +201,27 @@ public class Matriz {
      */
     @Override
     public boolean equals(Object obj) {
-      boolean x = true;
+      boolean x = false;
       if (this == obj) {
          x = true;
-         return true;
       }
-      if (obj == null || getClass() != obj.getClass()) {
-         x = false;
-         return false;
+      if (obj != null && getClass() == obj.getClass()) {
+         Matriz otra = (Matriz) obj;
+         if (m == otra.m && n == otra.n) {
+            x = true;
+         }
       }
-      Matriz otra = (Matriz) obj;
-      if (m != otra.m || n != otra.n) {
-         x = false;
-         return false;
-      }
-      for (int  i = 0; i < m; i++) {
-         for (int j = 0; j < n; j++) {
-            if (datos[i][j] != otra.datos[i][j]) {
-               x = false;
-               return false;
+      if (x) {
+         Matriz otra = (Matriz) obj;
+         for (int  i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+               if (datos[i][j] != otra.datos[i][j]) {
+                  x = false;
+               }
             }
          }
       }
       return x;
    }//Cierre del método
 
-}
+}// Cierre de la clase

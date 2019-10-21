@@ -17,7 +17,7 @@ public class PruebaMatriz {
     private static Random rnd;
     private int m, n;
     private Matriz m1, m2, m3, m4;
- 
+
     @BeforeAll
     public static void initRandom() {
         rnd = new Random();
@@ -182,8 +182,8 @@ public class PruebaMatriz {
         assertThat(m4.determinante()).isWithin(TOLERANCE).of(0);
         Matriz matriz = new Matriz(4, 4);
         double[][] ds = {{9, 1, 2, 8}, {2, 9, 7, 3}, {3, 4, 8, 5}, {5, 8, 3, 3}};
-        for (int i = 0; i < p; i++) {
-            for (int j = 0; j < p; j++) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
                 matriz.asignarEntrada(ds[i][j], i, j);
             }
         }
