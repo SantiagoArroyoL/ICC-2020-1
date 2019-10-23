@@ -31,8 +31,6 @@ public class Peon extends Pieza {
 				jugadas.add(new Posicion(fila - 1, columna - 1));
 			} else if (fila -1 >= 0) {
 				jugadas.add(new Posicion(fila - 1, columna));
-			} else{
-				System.out.println("Me la pelas");
 			}
 		} else {
 			if (fila == 6) {
