@@ -58,7 +58,7 @@ public class Dama extends Pieza{
 			for (int j = fila; j >= 0; j--) {
 				Pieza p2 = tab.obtenerPieza(j,j);
 				if (p1 == null && fila + n <= 7) {
-				if (fila + n <= 7) {
+				// if (fila + n <= 7) {
 					jugadas.add(new Posicion(fila + n, columna));
 					n++;
 				}  if (p2 == null && fila - m >= 0) {
@@ -128,6 +128,5 @@ public class Dama extends Pieza{
 			}
 		}
 		return jugadas;
-		}
 	}
 }
