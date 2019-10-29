@@ -12,7 +12,6 @@ public class Posicion {
 
 	/**
 	 * Crea una matriz de mxn donde todas las entradas son cero.
-	 *
 	 * @param fila donde ese encuentra la pieza
 	 * @param columna donde se encuentra l apieza
 	 */
@@ -22,7 +21,7 @@ public class Posicion {
 	}//Cierre del método
 
 	/**
-	 * método para obtener la fila de la Pieza
+	 * Método para obtener la fila de la Pieza
 	 * @return fila donde se encuentra la Pieza
 	 */
 	public int obtenerFila() {
@@ -30,7 +29,7 @@ public class Posicion {
 	}//Cierre del método
 
 	/**
-	 * método para obtener la columna de la Pieza
+	 * Método para obtener la columna de la Pieza
 	 * @return columna donde se encuentra la Pieza
 	 */
 	public int obtenerColumna() {
@@ -38,7 +37,7 @@ public class Posicion {
 	}//Cierre del método
 
 	/**
-	 * método para obtener la columna de la Pieza
+	 * Método para obtener la columna de la Pieza
 	 * @param obj El objeto a comparar
 	 * @return Verdadero si son iguales, falso si no lo son
 	 */

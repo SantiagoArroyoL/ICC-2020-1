@@ -18,7 +18,7 @@ public class Main {
 		do {
 			j = 0;
 			for (Posicion p : jugadas) {
-				Posicion actual = jugadas.get(j);
+			/*	Posicion actual = jugadas.get(j);
 				System.out.println("----------------------------Opcion " + j + "--------------------------------");
 				System.out.println("La posicion a la que te puedes mover es a la fila: " + actual.obtenerFila());
 				System.out.println("La posicion a la que te puedes mover es a la columna:" + actual.obtenerColumna());
@@ -39,6 +39,9 @@ public class Main {
 			} catch (Exception e) {
 				System.out.println("Por favor introduce sólo el número de las opciones mostradas");
 				System.exit(0);
+			} */
+				Posicion actual = jugadas.get(j);{
+				
 			}
 		} while (!validacion);
 	}

@@ -11,11 +11,21 @@ import java.util.LinkedList;
  */
 public class Peon extends Pieza {
 
+	/**
+	 * Constructor Peón
+	 *
+	 * @param color El color del peoń
+	 * @param posicion la posición del peoń
+	 */
 	public Peon(Color color, Posicion posicion){
 		super(color,posicion);
 	}
 
 
+	/**
+	 * Método para obtener Jugadas Legales
+	 * @return una lista con todas las posiciones legales
+	 */
 	@Override
 	public List<Posicion> obtenerJugadasLegales() {
 

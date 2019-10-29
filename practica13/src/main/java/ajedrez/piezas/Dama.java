@@ -11,12 +11,22 @@ import java.util.LinkedList;
  */
 public class Dama extends Pieza{
 
+	/**
+	 * Constructor Dama.
+	 *
+	 * @param color El color de la Dama
+	 * @param posicion La posicion de la Dama
+	 */
 	public Dama(Color color, Posicion posicion) {
 		super(color,posicion);
 	}
 
 	Tablero tab = Tablero.obtenerInstancia();
 
+	/**
+	 * Método para obtener Jugadas Legales
+	 * @return una lista con todas las posiciones legales
+	 */
 	@Override
 	public List<Posicion> obtenerJugadasLegales() {
 

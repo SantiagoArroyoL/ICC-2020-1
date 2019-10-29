@@ -13,7 +13,12 @@ import ajedrez.piezas.Color;
 import ajedrez.piezas.Pieza;
 import ajedrez.piezas.Peon;
 import ajedrez.piezas.Dama;
-
+/**
+* Clase que diuja el tablero y las fichas
+*
+* @author Arroyo Lozano Santiago
+* @version 29/10/2019 A
+*/
 public class Chess extends PApplet {
 
    private Tablero tablero;
@@ -67,7 +72,6 @@ public class Chess extends PApplet {
 
                Pieza pieza = tablero.obtenerPieza(j,i);
                if (pieza != null) {
-                  // image(imagenes.get(pieza.getClass().getSimpleName() + pieza.obtenerColor()), i * n, j * m, (i + 1) * n, (j + 1) * m);
                   image(imagenes.get(pieza.getClass().getSimpleName() + pieza.obtenerColor()), lado * i, lado * j, lado , lado);
                }
 
@@ -88,7 +92,7 @@ public class Chess extends PApplet {
 
                Pieza pieza = tablero.obtenerPieza(j,i);
                if (pieza != null) {
-                  image(imagenes.get(pieza.getClass().getSimpleName() + pieza.obtenerColor()), i * n, j * m, (i + 1) * n, (j + 1) * m);
+                  image(imagenes.get(pieza.getClass().getSimpleName() + pieza.obtenerColor()), lado * i, lado * j, lado , lado);
                }
 
             }
