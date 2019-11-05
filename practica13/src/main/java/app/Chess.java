@@ -48,6 +48,14 @@ public class Chess extends PApplet {
       imagenes.put("PeonNEGRO", loadImage(getClass().getResource("/b-pawn.png").getPath()));
       imagenes.put("DamaBLANCO", loadImage(getClass().getResource("/w-queen.png").getPath()));
       imagenes.put("DamaNEGRO", loadImage(getClass().getResource("/b-queen.png").getPath()));
+      imagenes.put("CaballoBLANCO", loadImage(getClass().getResource("/w-knight.png").getPath()));
+      imagenes.put("CaballoNEGRO", loadImage(getClass().getResource("/b-knight.png").getPath()));
+      imagenes.put("AlfilBLANCO", loadImage(getClass().getResource("/w-bishop.png").getPath()));
+      imagenes.put("AlfilNEGRO", loadImage(getClass().getResource("/b-bishop.png").getPath()));
+      imagenes.put("TorreBLANCO", loadImage(getClass().getResource("/w-rook.png").getPath()));
+      imagenes.put("TorreNEGRO", loadImage(getClass().getResource("/b-rook.png").getPath()));
+      imagenes.put("ReyBLANCO", loadImage(getClass().getResource("/w-king.png").getPath()));
+      imagenes.put("ReyNEGRO", loadImage(getClass().getResource("/b-king.png").getPath()));
       noLoop();
    }
 
@@ -81,6 +89,7 @@ public class Chess extends PApplet {
          //Para pantallas 4:3
          int m = displayHeight/12;
          int n = displayWidth/16;
+         int lado = m;
          for (int i = 0; i < 8; i ++) {
             for (int j = 0; j < 8; j ++) {
                if ((i + j + 1) % 2 == 0) {
