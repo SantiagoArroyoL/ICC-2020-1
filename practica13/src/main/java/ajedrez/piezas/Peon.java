@@ -1,5 +1,5 @@
 package ajedrez.piezas;
-
+import ajedrez.Tablero;
 import java.util.List;
 import java.util.LinkedList;
 
@@ -32,15 +32,19 @@ public class Peon extends Pieza {
 		LinkedList<Posicion> jugadas = new LinkedList<>();
 		int fila = obtenerPosicion().obtenerFila();
 		int columna = obtenerPosicion().obtenerColumna();
+		Tablero tab = Tablero.obtenerInstancia();
+		Pieza p1,p2;
 
 		if (obtenerColor() == Color.BLANCO) {
 			if (fila == 6) {
 				jugadas.add(new Posicion(fila - 2, columna));
 			}
-			if (fila - 1 >= 0 && columna - 1 >= 0) {
+			p1 = tab.obtenerPieza(fila-1,columna-1);
+			if (p1 != null && p1.obtenerColor() != Color.BLANCO) {
 				jugadas.add(new Posicion(fila - 1, columna - 1));
 			}
-			if (fila - 1 >= 0 && columna + 1 <= 7) {
+			p2 = tab.obtenerPieza(fila-1,columna+1);
+			if (p2 != null && p2.obtenerColor() != Color.BLANCO) {
 				jugadas.add(new Posicion(fila - 1, columna + 1));
 			}
 			if (fila -1 >= 0) {
@@ -50,10 +54,12 @@ public class Peon extends Pieza {
 			if (fila == 1) {
 				jugadas.add(new Posicion(fila + 2, columna));
 			}
-			if (fila + 1 <= 7 && columna + 1 <= 7) {
+			p1 = tab.obtenerPieza(fila+1,columna+1);
+			if (p1 != null && p1.obtenerColor() != Color.NEGRO) {
 				jugadas.add(new Posicion(fila + 1, columna + 1));
 			}
-			if (fila - 1 >= 0 && columna -1 >= 0) {
+			p2 = tab.obtenerPieza(fila+1,columna+1);
+			if (p2 != null && p2.obtenerColor() != Color.NEGRO) {
 				jugadas.add(new Posicion(fila + 1, columna - 1));
 			}
 			if (fila + 1 <= 7) {

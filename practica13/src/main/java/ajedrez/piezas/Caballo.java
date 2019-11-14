@@ -32,6 +32,7 @@ public class Caballo extends Pieza{
 
 		int n = 1;
 		int m = 1;
+		Pieza p1,p2;
 		LinkedList<Posicion> jugadas = new LinkedList<>();
 		int fila = obtenerPosicion().obtenerFila();
 		int columna = obtenerPosicion().obtenerColumna();
@@ -40,7 +41,7 @@ public class Caballo extends Pieza{
 		if (fila - 1 >= 0 && columna + 1 <= 7) {
 			fila--;
 			columna++;
-			Pieza p2 = tab.obtenerPieza(fila + 1,columna - 1);
+			p2 = tab.obtenerPieza(fila + 1,columna - 1);
 			if (fila - 1 >= 0 && p2.obtenerColor() != this.obtenerColor()) {
 				jugadas.add(new Posicion(fila - 1, columna));
 			}
@@ -52,7 +53,7 @@ public class Caballo extends Pieza{
 		if (fila + 1 <= 7 && columna + 1 <= 7) {
 			fila++;
 			columna++;
-			Pieza p2 = tab.obtenerPieza(fila + 1,columna - 1);
+			p2 = tab.obtenerPieza(fila + 1,columna - 1);
 			if (fila + 1 <= 7 && p2.obtenerColor() != this.obtenerColor()) {
 				jugadas.add(new Posicion(fila + 1, columna));
 			}
@@ -64,7 +65,7 @@ public class Caballo extends Pieza{
 		if (fila + 1 <= 7 && columna - 1 >= 0) {
 			fila++;
 			columna--;
-			Pieza p2 = tab.obtenerPieza(fila + 1,columna - 1);
+			p2 = tab.obtenerPieza(fila + 1,columna - 1);
 			if (fila + 1 <= 7 && p2.obtenerColor() != this.obtenerColor()) {
 				jugadas.add(new Posicion(fila + 1, columna));
 			}
@@ -76,7 +77,7 @@ public class Caballo extends Pieza{
 		if (fila - 1 >= 0 && columna - 1 >=0) {
 			fila--;
 			columna--;
-			Pieza p2 = tab.obtenerPieza(fila + 1,columna - 1);
+			p2 = tab.obtenerPieza(fila + 1,columna - 1);
 			if (fila - 1 >= 0 && p2.obtenerColor() != this.obtenerColor()) {
 				jugadas.add(new Posicion(fila - 1, columna));
 			}

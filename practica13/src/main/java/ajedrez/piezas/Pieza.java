@@ -25,6 +25,14 @@ public abstract class Pieza {
 	public abstract List<Posicion> obtenerJugadasLegales();
 
 	/**
+	 * Método que verifica si una jugada es legal o no
+	 * @return true si la jugada es legal - false en caso contrario
+	 */
+	public boolean esJugadaLegal(int fila, int columna) {
+		return obtenerJugadasLegales().contains(new Posicion(fila, columna));
+	}
+
+	/**
 	 * Método getter del color
 	 * @return El color de la pieza
 	 */

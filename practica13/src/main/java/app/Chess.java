@@ -7,12 +7,10 @@ package app;
 
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.event.MouseEvent;
 import java.util.HashMap;
 import ajedrez.Tablero;
-import ajedrez.piezas.Color;
-import ajedrez.piezas.Pieza;
-import ajedrez.piezas.Peon;
-import ajedrez.piezas.Dama;
+import ajedrez.piezas.*;
 /**
 * Clase que diuja el tablero y las fichas
 *
@@ -23,6 +21,8 @@ public class Chess extends PApplet {
 
    private Tablero tablero;
    private HashMap<String, PImage> imagenes;
+   private Pieza piezaSeleccionada;
+	private boolean seleccionandoJugada;
 
    public static void main(String[] args) {
       PApplet.main("app.Chess");
@@ -31,13 +31,7 @@ public class Chess extends PApplet {
    @Override
    public void settings() {
       //Diferenciamos entre pantallas de 16:9 y 4:3
-      if (displayWidth/16 == 120) {
-        int m = displayHeight/9;
-        size(displayWidth/2, displayHeight-m);
-     } else {
-        int m = displayHeight/3;
-        size(displayWidth/2, displayHeight-m);
-     }
+      size(displayHeight * 4 / 5, displayHeight * 4 / 5);
    }
 
    @Override
@@ -64,48 +58,68 @@ public class Chess extends PApplet {
     */
    @Override
    public void draw() {
-      if (displayWidth/16 == 120) {
-         //Para pantallas 16:9
-         int m = displayHeight/9;
-         int lado = m;
-         int n = displayWidth/16;
-         for (int i = 0; i < 8; i ++) {
-            for (int j = 0; j < 8; j ++) {
-               if ((i + j + 1) % 2 == 0) {
-                  fill(0x44000000);
-               } else {
-                  fill(255);
-               }
-               rect(i * n, j * m, (i + 1) * n, (j + 1) * m);
+      background(0xffffffff);
 
-               Pieza pieza = tablero.obtenerPieza(j,i);
-               if (pieza != null) {
-                  image(imagenes.get(pieza.getClass().getSimpleName() + pieza.obtenerColor()), lado * i, lado * j, lado , lado);
-               }
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				stroke(0xff000000);
+				strokeWeight(1);
+				if ((i + j) % 2 == 0) {
+					fill(0xffffffff);
+				} else {
+					fill(0x44000000);
+				}
+				rect(j * (height / 8), i * (height / 8),
+					 height / 8, height / 8);
+			}
+		}
 
-            }
-         }
-      } else {
-         //Para pantallas 4:3
-         int m = displayHeight/12;
-         int n = displayWidth/16;
-         int lado = m;
-         for (int i = 0; i < 8; i ++) {
-            for (int j = 0; j < 8; j ++) {
-               if ((i + j + 1) % 2 == 0) {
-                  fill(0x44000000);
-               } else {
-                  fill(255);
-               }
-               rect(i * n, j * m, (i + 1) * n, (j + 1) * m);
+      // Colores de las piezas seleccionadas y las que no
+      if (piezaSeleccionada != null) {
+			int fila = piezaSeleccionada.obtenerPosicion().obtenerFila(),
+				columna = piezaSeleccionada.obtenerPosicion().obtenerColumna();
+			stroke(0xffff0000);
+			strokeWeight(3);
+			for (Posicion pos: piezaSeleccionada.obtenerJugadasLegales()) {
+				fill((pos.obtenerFila() + pos.obtenerColumna()) % 2 == 0 ? 0xffffffff : 0x44000000);
+				rect(pos.obtenerColumna() * (width / 8),
+					 pos.obtenerFila() * (width / 8),
+				 	 width / 8, width / 8);
+			}
+			stroke(0xff0000ff);
+			strokeWeight(3);
+			fill((fila + columna) % 2 == 0 ? 0xffffffff : 0x44000000);
+			rect(columna * (width / 8), fila * (width / 8),
+				 width / 8, width / 8);
+		}
 
-               Pieza pieza = tablero.obtenerPieza(j,i);
-               if (pieza != null) {
-                  image(imagenes.get(pieza.getClass().getSimpleName() + pieza.obtenerColor()), lado * i, lado * j, lado , lado);
-               }
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				Pieza pieza = tablero.obtenerPieza(i, j);
+				if (pieza != null) {
+					image(imagenes.get(pieza.getClass().getSimpleName() + pieza.obtenerColor()),
+						  j * (height / 8), i * (height / 8),
+						  height / 8, height / 8);
+				}
+			}
+		}
+   }//Cierre del método
 
-            }
-         }
-      }
+   @Override
+    public void mouseClicked(MouseEvent event) {
+    	int fila = event.getY() / (width / 8);
+    	int columna = event.getX() / (width / 8);
+    	if (seleccionandoJugada) {
+    		tablero.moverPieza(piezaSeleccionada, fila, columna);
+    		seleccionandoJugada = false;
+    		piezaSeleccionada = null;
+    	} else {
+    		piezaSeleccionada = tablero.obtenerPieza(fila, columna);
+    		if (piezaSeleccionada == null	|| tablero.obtenerTurno() != piezaSeleccionada.obtenerColor()) {
+    			piezaSeleccionada = null;
+    		}
+    		seleccionandoJugada = piezaSeleccionada != null;
+    	}
+    	redraw();
    }//Cierre del método
 }//Cierre de la clase

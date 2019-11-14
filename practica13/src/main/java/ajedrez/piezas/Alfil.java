@@ -9,7 +9,7 @@ import java.util.LinkedList;
  * @author Arroyo Lozano Santiago
  * @version 24/10/2019 A
  */
-public class Alfil extends Pieza{
+public class Alfil extends Pieza {
 
 	/**
 	 * Constructor Alfil.
