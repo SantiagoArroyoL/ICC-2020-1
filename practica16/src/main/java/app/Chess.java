@@ -34,17 +34,24 @@ public class Chess extends PApplet {
       PApplet.main("app.Chess");
    }
 
+   /**
+   * Método que configura 
+   */
    @Override
    public void settings() {
       //Diferenciamos entre pantallas de 16:9 y 4:3
       size(displayHeight * 4 / 5, displayHeight * 4 / 5);
    }
 
+
+   /**
+   * Método que configura
+   */
    @Override
    public void setup() {
        try (var in = new ObjectInputStream(new FileInputStream("juego"))) {
             tablero = (Tablero) in.readObject();
-       } catch (Exception e) {
+       } catch (IOException | ClassNotFoundException e) {
            tablero = Tablero.obtenerInstancia();
        }
       imagenes = new HashMap<>();
@@ -115,6 +122,10 @@ public class Chess extends PApplet {
 		}
    }//Cierre del método
 
+   /**
+   * Método que detecta el mouse para mover una pieza
+   * @param event El botón del mouse
+   */
    @Override
     public void mouseClicked(MouseEvent event) {
     	int fila = event.getY() / (width / 8);
@@ -133,6 +144,9 @@ public class Chess extends PApplet {
     	redraw();
    }//Cierre del método
 
+   /**
+   * Método que guarda las jugadas hechas
+   */
    public void exit() {
        try (var out = new ObjectOutputStream(new FileOutputStream("juego"))) {
    			out.writeObject(tablero);
