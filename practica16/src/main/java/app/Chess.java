@@ -5,18 +5,20 @@
  */
 package app;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import processing.core.PApplet;
-import processing.core.PApplet;
-import processing.core.PImage;
-import processing.event.MouseEvent;
-import java.util.HashMap;
 import ajedrez.Tablero;
 import ajedrez.piezas.*;
+import java.util.HashMap;
+import java.awt.Component;
+import java.io.IOException;
+import processing.core.PImage;
+import processing.core.PApplet;
+import processing.core.PApplet;
+import javax.swing.JOptionPane;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import processing.event.MouseEvent;
 /**
 * Clase que diuja el tablero y las fichas
 *
@@ -35,7 +37,7 @@ public class Chess extends PApplet {
    }
 
    /**
-   * Método que configura 
+   * Método que configura
    */
    @Override
    public void settings() {
@@ -153,6 +155,8 @@ public class Chess extends PApplet {
        	} catch (IOException ioe) {
             ioe.printStackTrace();
         } finally {
+            Component temporaryLostComponent = null;
+            JOptionPane.showMessageDialog(temporaryLostComponent, "Felicidades! Saliste del juego!");
             dispose();
             System.exit(0);
         }

@@ -69,7 +69,11 @@ public class Tablero implements Serializable{
     }
 
     public Pieza obtenerPieza(int i, int j) {
-        return casillas[i][j].obtenerPieza();
+        if ((i >= 0 && i <= 7) && (j >= 0 && j <= 7)) {
+            return casillas[i][j].obtenerPieza();
+		} else {
+			return null;
+		}
     }
 
     public Color obtenerTurno() {
